@@ -1250,7 +1250,7 @@ async function downloadSlip(btn) {
   const month = new Date().toISOString().slice(0, 7);
   try {
     // Stamped on every page of every PDF (English letters — see pdf.js).
-    await downloadSlipPdf(holder, `bill-koto-ashbe-${month}.pdf`, `© ${new Date().getFullYear()} Bill Koto Ashbe · bill-koto-ashbe.vercel.app`);
+    await downloadSlipPdf(holder, `bill-koto-ashbe-${month}.pdf`, `© ${new Date().getFullYear()} Bill Koto Ashbe by Md Adnan · bill-koto-ashbe.vercel.app`);
     toast(t('pdfDone'));
   } catch {
     // Offline or the PDF tools didn't load: the print window can "Save as PDF" the same slip.

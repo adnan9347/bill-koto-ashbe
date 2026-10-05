@@ -131,6 +131,6 @@ export async function downloadSlipPdf(el, filename, copyright) {
     drawFooter(pdf, i + 1, pages.length, copyright);
   });
 
-  pdf.setProperties({ title: filename.replace(/\.pdf$/, ''), author: 'Bill Koto Ashbe', creator: 'Bill Koto Ashbe — bill-koto-ashbe.vercel.app' });
+  pdf.setProperties({ title: filename.replace(/\.pdf$/, ''), author: 'Md Adnan', creator: 'Bill Koto Ashbe — bill-koto-ashbe.vercel.app' });
   pdf.save(filename);
 }
