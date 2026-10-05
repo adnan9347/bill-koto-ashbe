@@ -1232,7 +1232,10 @@ function slipHTML() {
     <h2 class="slip__h" data-break>${t('tipsTitle')}</h2>
     ${tipsList}
 
-    <footer class="slip__foot" data-break>${t('slipFooter')}</footer>
+    <footer class="slip__foot" data-break>
+      <p>${t('slipFooter')}</p>
+      <p class="slip__copy">${t('slipCopyright', { year: fmtNum(new Date().getFullYear(), 0).replace(/[,٬]/g, '') })}</p>
+    </footer>
   </div>`;
 }
 
@@ -1249,7 +1252,8 @@ async function downloadSlip(btn) {
   holder.innerHTML = slipHTML();
   const month = new Date().toISOString().slice(0, 7);
   try {
-    await downloadSlipPdf(holder, `bill-koto-ashbe-${month}.pdf`);
+    // Stamped on every page of every PDF (English letters — see pdf.js).
+    await downloadSlipPdf(holder, `bill-koto-ashbe-${month}.pdf`, `© ${new Date().getFullYear()} Bill Koto Ashbe · bill-koto-ashbe.vercel.app`);
     toast(t('pdfDone'));
   } catch {
     // Offline or the PDF tools didn't load: the print window can "Save as PDF" the same slip.

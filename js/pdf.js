@@ -22,7 +22,8 @@ const LIBS = {
 };
 
 const A4 = { w: 210, h: 297 };       // millimetres
-const NEXT_PAGE_MARGIN = 12;          // top & bottom space (mm) on page 2 onwards
+const NEXT_PAGE_MARGIN = 12;          // top space (mm) on page 2 onwards
+const FOOTER_SPACE = 14;              // space (mm) kept free at the bottom of EVERY page for the copyright line
 
 function loadScript(src) {
   return new Promise((resolve, reject) => {
@@ -56,7 +57,7 @@ function planPages(totalHeight, cssPerMm, breaks) {
   const pages = [];
   let start = 0;
   while (start < totalHeight - 1) {
-    const usableMm = pages.length === 0 ? A4.h : A4.h - NEXT_PAGE_MARGIN * 2;
+    const usableMm = (pages.length === 0 ? A4.h : A4.h - NEXT_PAGE_MARGIN) - FOOTER_SPACE;
     let end = start + usableMm * cssPerMm;
     if (end >= totalHeight) {
       end = totalHeight;
@@ -70,8 +71,28 @@ function planPages(totalHeight, cssPerMm, breaks) {
   return pages;
 }
 
-/** Make the PDF from the slip element and download it as `filename`. */
-export async function downloadSlipPdf(el, filename) {
+/**
+ * Copyright + page number printed at the bottom of every page.
+ * Written in plain Latin letters on purpose: jsPDF's built-in fonts can't
+ * join Bangla letters, so this line is always in English.
+ */
+function drawFooter(pdf, page, total, copyright) {
+  const y = A4.h - 7;
+  pdf.setDrawColor(197, 208, 201);
+  pdf.setLineWidth(0.2);
+  pdf.line(14, y - 4.5, A4.w - 14, y - 4.5);
+  pdf.setFont('helvetica', 'normal');
+  pdf.setFontSize(8);
+  pdf.setTextColor(102, 117, 108);
+  pdf.text(copyright, 14, y);
+  pdf.text(`Page ${page} of ${total}`, A4.w - 14, y, { align: 'right' });
+}
+
+/**
+ * Make the PDF from the slip element and download it as `filename`.
+ * `copyright` is stamped at the foot of every page.
+ */
+export async function downloadSlipPdf(el, filename, copyright) {
   await loadLibraries();
   if (document.fonts && document.fonts.ready) await document.fonts.ready;
 
@@ -107,7 +128,9 @@ export async function downloadSlipPdf(el, filename) {
     if (i > 0) pdf.addPage();
     const y = i === 0 ? 0 : NEXT_PAGE_MARGIN;
     pdf.addImage(slice.toDataURL('image/jpeg', 0.92), 'JPEG', 0, y, A4.w, (end - start) / cssPerMm);
+    drawFooter(pdf, i + 1, pages.length, copyright);
   });
 
+  pdf.setProperties({ title: filename.replace(/\.pdf$/, ''), author: 'Bill Koto Ashbe', creator: 'Bill Koto Ashbe — bill-koto-ashbe.vercel.app' });
   pdf.save(filename);
 }
