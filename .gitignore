@@ -10,3 +10,6 @@ Thumbs.db
 
 # Local Claude preview settings
 .claude
+
+.vercel
+.env*

@@ -3,7 +3,7 @@
  *  server.js — run the WHOLE app on your computer, including
  *  the AI "Find wattage" lookup. No npm install needed.
  * ----------------------------------------------------------
- *      node server.js            → http://localhost:3000
+ *      node server.js   (or: npm run dev) → http://localhost:3000
  *
  *  • Serves the website files (index.html, css/, js/, icons/).
  *  • Runs api/lookup.js for POST /api/lookup, just like Vercel.
