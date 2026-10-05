@@ -1,0 +1,100 @@
+<!doctype html>
+<!--
+  ==========================================================
+   index.html — the page skeleton of "Bill Koto Ashbe?"
+  ----------------------------------------------------------
+   This file only holds the frame: header, step bar, five
+   empty <section>s (one per step), the sticky live total,
+   and the small pop-up message (toast). js/app.js fills the
+   sections with real content in Bangla or English.
+
+   Scripts:
+    • Motion (animations) from the jsDelivr CDN. If it fails to
+      load, the app still works — just with simpler motion.
+    • js/app.js as an ES module — so you need a small local
+      server to open it (see README), not a double-click.
+  ==========================================================
+-->
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Bill Koto Ashbe? — বিল কত আসবে?</title>
+  <meta name="description" content="Find out roughly how much your home electricity bill will be this month.">
+  <meta name="theme-color" content="#FFFFFF">
+  <meta name="color-scheme" content="light dark">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wdth,wght@75..125,400..800&family=Space+Grotesk:wght@400..700&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js" defer></script>
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#app" data-i18n="skipToContent">Skip to content</a>
+
+  <header class="app-header">
+    <div class="app-header__inner container">
+      <div class="brand">
+        <span class="brand__mark" id="brand-mark" aria-hidden="true"></span>
+        <span class="brand__name" data-i18n="appName">Bill Koto Ashbe?</span>
+      </div>
+
+      <div class="header-controls">
+        <button type="button" class="lang-toggle" id="lang-toggle" data-lang="en">
+          <span class="lang-toggle__opt" data-lang="bn" lang="bn" aria-hidden="true">বাংলা</span>
+          <span class="lang-toggle__opt" data-lang="en" lang="en" aria-hidden="true">EN</span>
+        </button>
+        <button type="button" class="theme-toggle" id="theme-toggle"></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app" class="app container" tabindex="-1">
+    <nav class="progress" id="progress" data-i18n-aria="progressLabel" hidden>
+      <p class="progress__meta" id="progress-meta"></p>
+      <ol class="progress__steps">
+        <li><button type="button" class="progress__step" data-goto="1"><span class="progress__bar" aria-hidden="true"></span><span class="progress__label" data-i18n="stepTariff">Price</span></button></li>
+        <li><button type="button" class="progress__step" data-goto="2"><span class="progress__bar" aria-hidden="true"></span><span class="progress__label" data-i18n="stepAppliances">Your things</span></button></li>
+        <li><button type="button" class="progress__step" data-goto="3"><span class="progress__bar" aria-hidden="true"></span><span class="progress__label" data-i18n="stepBudget">Budget</span></button></li>
+        <li><button type="button" class="progress__step" data-goto="4"><span class="progress__bar" aria-hidden="true"></span><span class="progress__label" data-i18n="stepResult">Bill</span></button></li>
+      </ol>
+    </nav>
+
+    <div class="steps" id="steps">
+      <section class="step" data-step="0" hidden></section>
+      <section class="step" data-step="1" hidden></section>
+      <section class="step" data-step="2" hidden></section>
+      <section class="step" data-step="3" hidden></section>
+      <section class="step" data-step="4" hidden></section>
+    </div>
+
+    <noscript><p class="panel">This app needs JavaScript. / এই অ্যাপ চালাতে জাভাস্ক্রিপ্ট চালু করুন।</p></noscript>
+  </main>
+
+  <!-- Live total, shown while adding appliances -->
+  <div class="live-bar" id="live-bar" hidden>
+    <div class="live-bar__inner">
+      <span class="live-bar__disc" id="live-meter" aria-hidden="true"></span>
+      <div class="live-stat">
+        <span class="live-stat__label" data-i18n="liveUnits">Units</span>
+        <span class="live-stat__value" id="live-units">0</span>
+      </div>
+      <div class="live-stat live-stat--bill">
+        <span class="live-stat__label" data-i18n="liveBill">Bill so far</span>
+        <span class="live-stat__value" id="live-bill">৳0.00</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- The bill slip is built here (off-screen) when someone downloads the PDF or prints -->
+  <div class="pdf-slip" id="pdf-slip" aria-hidden="true"></div>
+</body>
+</html>

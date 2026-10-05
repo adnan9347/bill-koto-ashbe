@@ -1,0 +1,5 @@
+# Not needed on Vercel (server.js is only for running on your own computer)
+server.js
+.claude
+.env
+.env.*

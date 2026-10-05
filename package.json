@@ -1,0 +1,10 @@
+{
+  "name": "bill-koto-ashbe",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bill Koto Ashbe? — a household electricity bill estimator for Bangladesh. No build step; this file only tells Vercel that api/*.js uses ES modules.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

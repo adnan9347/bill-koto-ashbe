@@ -1,0 +1,9 @@
+<!--
+  icon.svg — the app icon: a white lightning bolt on solid green.
+  icon-192.png and icon-512.png were exported from this same design.
+  To re-export after editing, see README → "Icons".
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0B7A4B"/>
+  <path d="M290 92 166 282h86l-30 138 124-190h-86z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="10" stroke-linejoin="round"/>
+</svg>

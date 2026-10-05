@@ -1,0 +1,9 @@
+# Secrets — never commit API keys
+.env
+.env.*
+
+# Local tooling
+.vercel
+node_modules
+.DS_Store
+Thumbs.db
