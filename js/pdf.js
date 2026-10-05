@@ -72,9 +72,9 @@ function planPages(totalHeight, cssPerMm, breaks) {
 }
 
 /**
- * Copyright + page number printed at the bottom of every page.
- * Written in plain Latin letters on purpose: jsPDF's built-in fonts can't
- * join Bangla letters, so this line is always in English.
+ * Copyright at the bottom of every page, plus "Page X of Y" when there
+ * is more than one page. Written in plain Latin letters on purpose:
+ * jsPDF's built-in fonts can't join Bangla letters, so this line is English.
  */
 function drawFooter(pdf, page, total, copyright) {
   const y = A4.h - 7;
@@ -85,7 +85,7 @@ function drawFooter(pdf, page, total, copyright) {
   pdf.setFontSize(8);
   pdf.setTextColor(102, 117, 108);
   pdf.text(copyright, 14, y);
-  pdf.text(`Page ${page} of ${total}`, A4.w - 14, y, { align: 'right' });
+  if (total > 1) pdf.text(`Page ${page} of ${total}`, A4.w - 14, y, { align: 'right' });
 }
 
 /**

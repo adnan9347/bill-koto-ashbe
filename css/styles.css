@@ -1485,7 +1485,6 @@ body.has-live-bar .toast { bottom: calc(100px + env(safe-area-inset-bottom)); }
   color: #66756C;
   font-size: 12px;
 }
-.slip__copy { margin-top: 6px !important; color: #0B7A4B; font-weight: 600; }
 
 /* Print fallback (used if the PDF tools can't load): print only the slip. */
 @media print {

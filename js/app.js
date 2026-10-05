@@ -1210,7 +1210,7 @@ function slipHTML() {
       <div class="slip__big"><span>${t('totalBill')}</span><strong>${fmtMoney(bill.total)}</strong></div>
       <div><span>${t('totalUnits')}</span><strong>${fmtUnits(bill.totalKwh)}</strong></div>
       <div><span>${t('slipBudget')}</span><strong>${fmtMoney(state.budget)}</strong></div>
-      <div class="slip__status slip__status--${mood}"><span>${t('slipStatus')}</span><strong>${t(`mood_${mood}`)}</strong></div>
+      <div class="slip__status slip__status--${mood}"><span>${t('slipStatus')}</span><strong>${t(`slipStatus_${mood}`)}</strong></div>
     </section>
 
     <h2 class="slip__h" data-break>${t('slipUsageTitle')}</h2>
@@ -1232,10 +1232,7 @@ function slipHTML() {
     <h2 class="slip__h" data-break>${t('tipsTitle')}</h2>
     ${tipsList}
 
-    <footer class="slip__foot" data-break>
-      <p>${t('slipFooter')}</p>
-      <p class="slip__copy">${t('slipCopyright', { year: fmtNum(new Date().getFullYear(), 0).replace(/[,٬]/g, '') })}</p>
-    </footer>
+    <footer class="slip__foot" data-break><p>${t('slipFooter')}</p></footer>
   </div>`;
 }
 
